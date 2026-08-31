@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 4.3)
+cmake_minimum_required(VERSION 3.10)
+
 project(INFT2503_ovinger)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(INFT2503_ovinger main.cpp)
+add_subdirectory(oving1)
