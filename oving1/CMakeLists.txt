@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 4.4)
+
 add_executable(oppgave-a oppgave-a.cpp)
 add_executable(oppgave-b oppgave-b.cpp)
 
