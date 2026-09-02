@@ -15,7 +15,7 @@ int main() {
         std::cout << "Temperature nr " << i + 1 << ": ";
         std::cin >> temperature;
 
-        if (temperature <=10) {
+        if (temperature < 10) {
             under10++;
         }
         else if (temperature <=20) {
