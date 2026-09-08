@@ -1,6 +1,6 @@
 ## Oppgave 3
 
-Programmet har flere problemer. 
+Feil i koden
 1. `text` er en tabell med plass til fem
 `char`-verdier. Når en slik tabell brukes som en C-streng, må teksten avsluttes med nulltegnet `'\0'`. Det betyr at det 
 normalt bare er plass til fire vanlige tegn i `text`. 
@@ -13,7 +13,7 @@ element. Det finnes ingen kontroll på om pekeren har kommet til slutten av tabe
 vil pekeren da etter hvert passere nulltegnet og bevege seg utenfor `text`. Programmet vil da lese og skrive i minne som 
 ikke tilhører tabellen. Dette gir undefined behavior.
 
-3. Vi ser også at programmet endrer selve teksten mens det søker, fordi
+3. Vi ser også at programmet endrer selve teksten mens det søker fordi
 `*pointer = search_for` overskriver tegnene med `e`. C++ stopper ikke automatisk en peker når den kommer til slutten av en tabell.
 
 ```cpp
