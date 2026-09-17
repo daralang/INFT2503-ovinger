@@ -1,4 +1,3 @@
-// Rette opp i feilene
 const double pi = 3.141592;
 
 class Circle {
