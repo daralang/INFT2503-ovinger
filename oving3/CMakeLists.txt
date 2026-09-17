@@ -5,9 +5,12 @@ add_executable(oppgave2 oppgave2.cpp
 add_executable(oppgave3 oppgave3.cpp
         commodity.hpp
         commodity.cpp)
+add_executable(oppgave4a-h oppgave4a-h.cpp)
 
 
 target_compile_options(oppgave2 PRIVATE -Wall -Wextra)
 target_compile_options(oppgave3 PRIVATE -Wall -Wextra)
+target_compile_options(oppgave4a-h PRIVATE -Wall -Wextra)
+
 
 
