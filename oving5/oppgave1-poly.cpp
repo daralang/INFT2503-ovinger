@@ -28,6 +28,10 @@ public:
 
     /// Returns true if the given chess piece move is valid
     virtual bool valid_move(int from_x, int from_y, int to_x, int to_y) const = 0;
+
+    /* Part of task 2*/
+    virtual std::string symbol() const = 0;
+
   };
 
   class King : public Piece {
@@ -46,10 +50,18 @@ public:
 
       return dx <= 1 && dy <= 1 && (dx != 0 || dy != 0);
     }
+    /* Part of task 2*/
+    string symbol() const override {
+      if (color == Color::WHITE)
+        return "WK";
+      else
+        return "BK";
+    }
+
   };
 
   class Knight : public Piece {
-    public:
+  public:
     Knight(Color color) : Piece(color) {}
 
     string type() const override {
@@ -63,6 +75,14 @@ public:
 
       return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
     }
+    /* Part of task 2*/
+    string symbol() const override {
+      if (color == Color::WHITE)
+        return "WN";
+      else
+        return "BN";
+    }
+
   };
 
   ChessBoard() {
@@ -70,6 +90,21 @@ public:
     squares.resize(8);
     for (auto &square_column : squares)
       square_column.resize(8);
+  }
+  /* Part of task 2*/
+  void print() const {
+    for (int y = 7; y >= 0; --y) {
+      cout << y + 1 << " ";
+
+      for (int x = 0; x < 8; ++x) {
+        if (squares[x][y])
+          cout << squares[x][y]->symbol() << " ";
+        else
+          cout << ".. ";
+      }
+      cout << endl;
+    }
+    cout << "  a  b  c  d  e  f  g  h" << endl;
   }
 
   /// 8x8 squares occupied by 1 or 0 chess pieces
@@ -86,25 +121,46 @@ public:
     auto &piece_from = squares[from_x][from_y];
     if (piece_from) {
       if (piece_from->valid_move(from_x, from_y, to_x, to_y)) {
-        cout << piece_from->type() << " is moving from " << from << " to " << to << endl;
+        cout << piece_from->type()
+             << " is moving from "
+             << from << " to " << to << endl;
+
         auto &piece_to = squares[to_x][to_y];
         if (piece_to) {
           if (piece_from->color != piece_to->color) {
-            cout << piece_to->type() << " is being removed from " << to << endl;
+            cout << piece_to->type()
+                 << " is being removed from "
+                 << to << endl;
+
             if (auto king = dynamic_cast<King *>(piece_to.get()))
-              cout << king->color_string() << " lost the game" << endl;
+              cout << king->color_string()
+                   << " lost the game" << endl;
+
           } else {
-            // piece in the from square has the same color as the piece in the to square
-            cout << "can not move " << piece_from->type() << " from " << from << " to " << to << endl;
+            cout << "can not move "
+                 << piece_from->type()
+                 << " from " << from
+                 << " to " << to << endl;
+
             return false;
           }
         }
         piece_to = move(piece_from);
+
+        // Task 2
+        print();
+
         return true;
+
       } else {
-        cout << "can not move " << piece_from->type() << " from " << from << " to " << to << endl;
+        cout << "can not move "
+             << piece_from->type()
+             << " from " << from
+             << " to " << to << endl;
+
         return false;
       }
+
     } else {
       cout << "no piece at " << from << endl;
       return false;
