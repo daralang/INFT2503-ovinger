@@ -44,14 +44,12 @@ Fraction &Fraction::operator-=(const Fraction &other) {
   return *this;
 }
 
-// Medlemsfunksjonen brukes ved fraction - heltall.
 Fraction Fraction::operator-(int integer) const {
   Fraction fraction = *this;
   fraction -= Fraction(integer, 1);
   return fraction;
 }
 
-// Ikke-medlemsfunksjonen brukes ved heltall - fraction.
 Fraction operator-(int integer, const Fraction &fraction) {
   Fraction result(integer, 1);
   result -= fraction;
